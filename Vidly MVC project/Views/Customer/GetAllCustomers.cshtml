@@ -1,0 +1,34 @@
+﻿@model List<Vidly_MVC_project.Models.Customer>
+@{
+    ViewBag.Title = "GetAllCustomers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+@if (Model.Count == 0)
+{
+    <h2> No customers </h2>
+}
+else
+{
+    <table>
+        <thead>
+            <th>Customer</th>
+            <th>MembershipType</th>
+        </thead>
+        <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    string url = $"/customers/details/{Model[i].Id}";
+                    string EditUrl = $"/customers/Edit/{Model[i].Id}";
+                    <tr>
+                        <td> <a href=@url>@Model[i].Name</a> </td>
+                        <td> @Model[i].MembershipType.Name </td>
+                        <td> <a href=@EditUrl> Edit </a> </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+}
+
