@@ -22,9 +22,9 @@ namespace Vidly_MVC_project.Controllers.API
 
         public IEnumerable<MovieDto> GetMovies()
         {
-            var moviesQuery = _context.Movies.Include(x => x.Genre).Where(m => m.NumberInStocks > 0);
-
-            return moviesQuery
+            return _context.Movies
+                .Include(x => x.Genre)
+                .Where(m => m.NumberInStocks > 0)
                 .ToList()
                 .Select(Mapper.Map<Movie, MovieDto>);
         }

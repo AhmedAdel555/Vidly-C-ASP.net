@@ -19,10 +19,9 @@ namespace Vidly_MVC_project.Controllers.API
         // GET /api/customer
         public IHttpActionResult GetCustomers()
         {
-            var customersQuery = _context.Customers
-                .Include(c => c.MembershipType);
 
-            var customerDtos = customersQuery
+            var customerDtos = _context.Customers
+                .Include(c => c.MembershipType)
                 .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
 
@@ -78,15 +77,23 @@ namespace Vidly_MVC_project.Controllers.API
         [HttpDelete]
         public IHttpActionResult DeleteCustomer(int id)
         {
-            var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+            
+            try
+            {
+                var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
+                if (customerInDb == null)
+                    return NotFound(); ;
 
-            if (customerInDb == null)
-                return NotFound();
+                _context.Customers.Remove(customerInDb);
+                _context.SaveChanges();
 
-            _context.Customers.Remove(customerInDb);
-            _context.SaveChanges();
-
-            return Ok();
+                return Ok();
+            }
+            catch
+            {
+                return Ok();
+            }
+            
         }
     }
 }

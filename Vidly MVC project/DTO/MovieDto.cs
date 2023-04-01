@@ -15,7 +15,7 @@ namespace Vidly_MVC_project.DTO
 
         [Required]
         public int GenreId { get; set; }
-        public Genre Genre { get; set; }
+        public GenreDto Genre { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 

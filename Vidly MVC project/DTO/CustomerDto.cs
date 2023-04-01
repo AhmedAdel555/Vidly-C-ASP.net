@@ -20,6 +20,6 @@ namespace Vidly_MVC_project.DTO
         public DateTime? BirthDate { get; set; }
 
         public byte MembershipTypeId { get; set; }
-        public MembershipType MembershipType { get; set; }
+        public MembershipTypeDto MembershipType { get; set; }
     }
 }

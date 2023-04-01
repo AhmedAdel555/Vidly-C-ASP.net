@@ -61,8 +61,7 @@ namespace Vidly_MVC_project.Controllers
         [Route("customers")]
         public ActionResult GetAllCustomers()
         {
-            List<Customer> customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
+            return View();
         }
 
         [Route("customers/details/{Id}")]
